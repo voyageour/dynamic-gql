@@ -3,6 +3,7 @@ package com.generator.gql.s3;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.ResponseBytes;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.CreateBucketRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
@@ -22,6 +23,7 @@ public class S3Service {
                 .key(key)
                 .build();
 
+        s3Client.createBucket(CreateBucketRequest.builder().bucket(bucketName).build());
         s3Client.putObject(request, Path.of(schemaContent));
     }
 
